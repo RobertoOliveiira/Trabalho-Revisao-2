@@ -2,6 +2,7 @@ var listCharacter = new Array();
 
 addEventListener('load', function(){
     getAPI(URL_API_CHARACTER, criaListaCharacter);
+    
 });
 
 
