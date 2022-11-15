@@ -23,12 +23,16 @@
         <img src="_img/logo.png" alt="Bootstrap" width="150" height="150" />
         <ul class="nav nav-pills">
           <li class="nav-item">
-            <a class="nav-link" id="active" aria-current="page"  href="index.html"
+            <a
+              class="nav-link"
+              id="active"
+              aria-current="page"
+              href="index.html"
               >Home</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="search.html">Surprenda-me</a>
+            <a class="nav-link" onclick="surprise()" href="#">Surprenda-me</a>
           </li>
         </ul>
         <form class="d-flex" role="search" id="form-header">
@@ -39,24 +43,23 @@
             aria-label="Pesquisar"
             id="input-search"
           />
-          <button class="btn btn-success" type="button" onclick="search()">Pesquisa</button>
+          <button class="btn btn-success" type="button" onclick="search()">
+            Pesquisa
+          </button>
         </form>
       </nav>
     </header>
-    <section id="choose">
-    <button onclick="define(this)">Category</button> / <button onclick="define(this)">Alphabetics</button>
-    </section>
+    <main>
+      <section id="choose">
+        <button class="buttons" onclick="define(this)">Category</button> |
+        <button  class="buttons" onclick="define(this)">Alphabetics</button>
+      </section>
 
-    <section hidden class="selection-section" id="alfabetico">
-      
-    </section>
-    <section  class="selection-section" id="categorias">
-      
-    </section>
+      <section hidden class="selection-section" id="alfabetico"></section>
+      <section class="selection-section" id="categorias"></section>
 
-    <section id="infos">
-
-    </section>
+      <section id="infos"></section>
+    </main>
   </body>
   <script src="_js/main.js"></script>
   <!-- JQuery -->

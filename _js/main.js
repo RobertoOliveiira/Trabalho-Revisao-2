@@ -12,9 +12,15 @@ const search = async ()=>{
     listar(`http://www.themealdb.com/api/json/v1/1/search.php?s=${input.value}`)
 }
 
+const surprise = async () =>{
+    let data = await getAPI('http://www.themealdb.com/api/json/v1/1/random.php');
+    localStorage.setItem('id', data.meals[0].idMeal);
+    window.location.href = "details.html";
+}
+
 const getAPI = async (url) => {
     //console.log(url)
-    const resp = await fetch(url, );
+    const resp = await fetch(url);
     const data = await resp.json();
     return data;
 }
@@ -40,7 +46,7 @@ const alphabetics = async () =>{
     let containerList = document.getElementById('alfabetico');
     alphabet.forEach(i =>{
         let div = document.createElement('div');
-        let button = `<button onclick=listar('${API_find_letter}f=${i}') >${i}</button>`;
+        let button = `<button class="buttons" onclick=listar('${API_find_letter}f=${i}') >${i}</button>`;
 
         div.innerHTML = button;
         containerList.appendChild(div);
@@ -56,7 +62,7 @@ const category = async () =>{
 
     data.categories.forEach(meal => {
         let div = document.createElement('div');
-        let button = `<button onclick=listar('${API_List_Category}c=${meal.strCategory}') >${meal.strCategory}</button>`;
+        let button = `<button class="buttons" onclick=listar('${API_List_Category}c=${meal.strCategory}') >${meal.strCategory}</button>`;
 
         div.innerHTML = button;
         containerList.appendChild(div);
@@ -74,15 +80,15 @@ const listar = async (url) =>{
 
     data.meals.forEach(meal => {
         let html = document.createElement('div');
-        html.classList.add('card', 'col-3', 'my-4', 'bg-dark', 'ms-1');
+        html.classList.add('card', 'col-2', 'my-4', 'ms-1', 'my-card');
         html.addEventListener('click', ()=> goDetails(meal.idMeal))
 
         let htmlBody = `
-        <div class="card-header">
-            <img class="card-img-top" src="${meal.strMealThumb}" alt="${meal.strMeal}">
+        <div class="card-header" id="imgHeader" >
+            <img  src="${meal.strMealThumb}" alt="${meal.strMeal}">
         </div>
         <div class="card-body bg-white">
-            <h2 class="text-primary text-center">${meal.strMeal}</h2>
+            <h2 class=" text-center">${meal.strMeal}</h2>
         </div>`;
 
         html.innerHTML = htmlBody;
