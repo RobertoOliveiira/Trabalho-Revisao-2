@@ -81,6 +81,11 @@ margin-left: 5px;
     box-shadow: rgb(0 0 0 / 43%) 5px 5px 20px 0px;
 }
 
+.my-card:hover{
+    transition: 0.5s;
+    transform: scale(1.02);
+}
+
 .buttons:hover {
   border-color: #282828;
   box-shadow: rgb(0 0 0 / 43%) 5px 5px 20px 0px;
