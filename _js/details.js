@@ -1,7 +1,10 @@
 let API_buscar = 'http://www.themealdb.com/api/json/v1/1/lookup.php?i=';
+let favorite = []
 
-addEventListener('load', function () {
+addEventListener('load', function () {  
     loadItem();
+    favorite = localStorage.getItem('favorite')||[];
+
 });
 
 
@@ -29,6 +32,25 @@ const getAPI = async (url) => {
     return data;
 }
 
+const favoritar = (id , a) =>{
+    let lista = JSON.parse(localStorage.getItem('favorite')|| '[]');
+    lista.push(id);
+    localStorage.setItem('favorite',JSON.stringify(lista));
+    a.setAttribute('src', '_img/like.png');
+    a.setAttribute('onclick', `desfavoritar(${id},this)`);
+    console.log('favoritar');
+}
+
+const desfavoritar = (id, a) =>{
+    let lista = JSON.parse(localStorage.getItem('favorite')|| '[]');
+    let aux = lista.findIndex((a) => a == id );
+    lista.splice(aux, 1);
+    localStorage.setItem('favorite',JSON.stringify(lista));
+    a.setAttribute('src', '_img/not-like.png');
+    a.setAttribute('onclick', `favoritar(${id},this)`);
+    console.log('desfavoritar');
+}
+
 
 const listar = async () => {
 
@@ -39,14 +61,19 @@ const listar = async () => {
 
 
     let container = document.createElement('div');
-    container.classList.add('container');
+    container.classList.add('containerInf');
+
+    let favorito = document.createElement('div');
+    favorito.classList.add('favorito');
+    let coracao = favorite.includes(data.meals[0].idMeal) ? `<div class="fav"><img onclick="desfavoritar('${data.meals[0].idMeal}', this)" src='_img/like.png'/></div>` : `<div class="fav"><img onclick="favoritar('${data.meals[0].idMeal}', this)"  src='_img/not-like.png'/> </div>`
+    favorito.innerHTML = coracao
 
     let nome = document.createElement('h2');
     nome.classList.add('name');
     nome.textContent = data.meals[0].strMeal;
 
     let containerInfos = document.createElement('div');
-    containerInfos.classList.add('containerInfos');
+    containerInfos.classList.add('container','containerInfos');
 
     let containerImg = document.createElement('div');
     containerImg.classList.add('img');
@@ -60,6 +87,12 @@ const listar = async () => {
     let ingList = document.createElement('div');
     let ingredientes = '';
     ingredientes = verificaIngredientes(data);
+
+    let containerVideo = document.createElement('div');
+    containerVideo.classList.add('containerVideo');
+    let video = `<iframe width="1100" height="600" src="https://www.youtube.com/embed/${data.meals[0].strYoutube.split('=')[1]}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+
+    containerVideo.innerHTML = video;
 
     ingList.innerHTML = ingredientes;
 
@@ -79,9 +112,11 @@ const listar = async () => {
     containerInfos.appendChild(containerImg);
     containerInfos.appendChild(containerIngredientes);
 
+    container.appendChild(favorito);
     container.appendChild(nome);
     container.appendChild(containerInfos);
     container.appendChild(containerPreparo);
+    container.appendChild(containerVideo);
 
     html.appendChild(container);
 

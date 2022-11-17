@@ -1,10 +1,12 @@
 const API_List_Category = 'http://www.themealdb.com/api/json/v1/1/filter.php?'
 const API_find_letter = 'http://www.themealdb.com/api/json/v1/1/search.php?'
 const alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+let favorite = [];
 
 addEventListener('load', function(){
+    favorite = localStorage.getItem('favorite')||[];
     listar(`${API_List_Category}c=Beef`);
-    buttons();
+    //buttons();
 });
 
 const search = async ()=>{
@@ -70,6 +72,25 @@ const category = async () =>{
 
 }
 
+const favoritar = (id , a) =>{
+    let lista = JSON.parse(localStorage.getItem('favorite')|| '[]');
+    lista.push(id);
+    localStorage.setItem('favorite',JSON.stringify(lista));
+    a.setAttribute('src', '_img/like.png');
+    a.setAttribute('onclick', `desfavoritar(${id},this)`);
+    console.log('favoritar');
+}
+
+const desfavoritar = (id, a) =>{
+    let lista = JSON.parse(localStorage.getItem('favorite')|| '[]');
+    let aux = lista.findIndex((a) => a == id );
+    lista.splice(aux, 1);
+    localStorage.setItem('favorite',JSON.stringify(lista));
+    a.setAttribute('src', '_img/not-like.png');
+    a.setAttribute('onclick', `favoritar(${id},this)`);
+    console.log('desfavoritar');
+}
+
 const listar = async (url) =>{
     console.log(url)
     let data = await getAPI(url);
@@ -81,11 +102,12 @@ const listar = async (url) =>{
     data.meals.forEach(meal => {
         let html = document.createElement('div');
         html.classList.add('card', 'col-2', 'my-4', 'ms-1', 'my-card');
-        html.addEventListener('click', ()=> goDetails(meal.idMeal))
+        //html.addEventListener('click', ()=> goDetails(meal.idMeal))
 
         let htmlBody = `
         <div class="card-header" id="imgHeader" >
-            <img  src="${meal.strMealThumb}" alt="${meal.strMeal}">
+            ${favorite.includes(meal.idMeal) ? `<div class="like"><img onclick="desfavoritar('${meal.idMeal}', this)" src='_img/like.png'/></div>` : `<div class="like"><img onclick="favoritar('${meal.idMeal}', this)"  src='_img/not-like.png'/> </div>`}
+            <img onclick="goDetails('${meal.idMeal}')" src="${meal.strMealThumb}" alt="${meal.strMeal}">
         </div>
         <div class="card-body bg-white">
             <h2 class=" text-center">${meal.strMeal}</h2>
@@ -99,4 +121,9 @@ const listar = async (url) =>{
 const goDetails = (idMeal) =>{
     localStorage.setItem('id', idMeal);    
     window.location.href = "details.html";
+}
+
+const inscrever = () => {
+    let input = document.getElementById('input-newsletter');
+    localStorage.setItem('id', input.value); 
 }
