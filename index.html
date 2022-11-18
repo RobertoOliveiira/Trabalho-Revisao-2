@@ -35,6 +35,9 @@
             <a class="nav-link" onclick="surprise()" href="#">Surprenda-me</a>
           </li>
         </ul>
+        <div style="
+    display: flex;
+    margin-left: 58%;"><button class="buttons favoriteButton" onclick="loadFavorites()">favorites</button></div>
         <form class="d-flex" role="search" id="form-header">
           <input
             class="form-control me-2"
@@ -47,9 +50,11 @@
             Pesquisa
           </button>
         </form>
+
       </nav>
     </header>
     <main>
+      
       <section id="choose">
         <button class="buttons" onclick="define(this)">Category</button> |
         <button class="buttons" onclick="define(this)">Alphabetics</button>

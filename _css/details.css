@@ -2,10 +2,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    
+}
+
+#infos{
     box-shadow: rgb(0 0 0 / 19%) 10px 7px 20px, rgb(0 0 0 / 23%) 0px 6px 13px;;
     margin-top: 20px;
     border-radius: 8px;
     margin-bottom: 30px;
+    width: 70%;
+    flex-direction: column-reverse;
+}
+
+#comentar{
+    margin: auto;
+    margin-top: 20px;
     width: 70%;
 }
 
@@ -41,6 +52,34 @@
 .containerIng  p{
 font-size: 20px;
 font-weight: 400;
+}
+
+#form{
+    margin-bottom: 30px;
+}
+
+#comentarios{
+    width: 70%;
+    margin: auto;
+    margin-top: 30px;
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+}
+.comentariosContainer{
+    margin: 10px 0;
+}
+
+.comentariosdesc{
+    margin-left: 10px;
+}
+
+.comentariosNomeContainer{
+    display: flex;
+    align-items: flex-start
+}
+
+.comentariosNomeContainer img{
+   margin-left: 30px;
 }
 
 .containerIng  {
@@ -114,3 +153,4 @@ font-weight: 400;
 .rate > label:hover ~ input:checked ~ label {
     color: #c59b08;
 }
+

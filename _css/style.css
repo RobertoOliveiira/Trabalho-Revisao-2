@@ -62,7 +62,7 @@ main{
 }
 .like:hover{
     position: absolute;
-    transition: 1s;
+    transition: 0.5s;
     width: 10% !important;
     transform: scale(1.05);
     opacity: 100%;
@@ -119,12 +119,12 @@ margin-left: 5px;
   outline: none;
 }
 
-
 #infos{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
+
 
 #choose{
     margin-top: 30px;

@@ -1,12 +1,13 @@
 const API_List_Category = 'http://www.themealdb.com/api/json/v1/1/filter.php?'
 const API_find_letter = 'http://www.themealdb.com/api/json/v1/1/search.php?'
+const API_Search_id = 'http://www.themealdb.com/api/json/v1/1/lookup.php?i='
 const alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 let favorite = [];
 
 addEventListener('load', function(){
     favorite = localStorage.getItem('favorite')||[];
     listar(`${API_List_Category}c=Beef`);
-    //buttons();
+    buttons();
 });
 
 const search = async ()=>{
@@ -118,6 +119,30 @@ const listar = async (url) =>{
     });
 }
 
+const loadFavorites = async () =>{
+    let list = JSON.parse(localStorage.getItem('favorite'));
+    let containerList = document.getElementById('infos');
+    containerList.innerHTML = '';
+    list.forEach(async (a)=> {
+        let data = await getAPI(`${API_Search_id}${a}`)
+        let html = document.createElement('div');
+        html.classList.add('card', 'col-2', 'my-4', 'ms-1', 'my-card');
+
+        let htmlBody = `
+        <div class="card-header" id="imgHeader" >
+            ${favorite.includes(data.meals[0].idMeal) ? `<div class="like"><img onclick="desfavoritar('${data.meals[0].idMeal}', this)" src='_img/like.png'/></div>` : `<div class="like"><img onclick="favoritar('${data.meals[0].idMeal}', this)"  src='_img/not-like.png'/> </div>`}
+            <img onclick="goDetails('${data.meals[0].idMeal}')" src="${data.meals[0].strMealThumb}" alt="${data.meals[0].strMeal}">
+        </div>
+        <div class="card-body bg-white">
+            <h2 class=" text-center">${data.meals[0].strMeal}</h2>
+        </div>`;
+
+        html.innerHTML = htmlBody;
+        containerList.appendChild(html);
+})
+
+}
+
 const goDetails = (idMeal) =>{
     localStorage.setItem('id', idMeal);    
     window.location.href = "details.html";
@@ -125,5 +150,6 @@ const goDetails = (idMeal) =>{
 
 const inscrever = () => {
     let input = document.getElementById('input-newsletter');
-    localStorage.setItem('id', input.value); 
+    localStorage.setItem('id', input.value);   
+
 }
