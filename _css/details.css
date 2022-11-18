@@ -1,10 +1,23 @@
-.container{
+.containerInf{
     display: flex;
     flex-direction: column;
     align-items: center;
+    
+}
+
+#infos{
     box-shadow: rgb(0 0 0 / 19%) 10px 7px 20px, rgb(0 0 0 / 23%) 0px 6px 13px;;
     margin-top: 20px;
     border-radius: 8px;
+    margin-bottom: 30px;
+    width: 70%;
+    flex-direction: column-reverse;
+}
+
+#comentar{
+    margin: auto;
+    margin-top: 20px;
+    width: 70%;
 }
 
 .name{
@@ -41,6 +54,34 @@ font-size: 20px;
 font-weight: 400;
 }
 
+#form{
+    margin-bottom: 30px;
+}
+
+#comentarios{
+    width: 70%;
+    margin: auto;
+    margin-top: 30px;
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+}
+.comentariosContainer{
+    margin: 10px 0;
+}
+
+.comentariosdesc{
+    margin-left: 10px;
+}
+
+.comentariosNomeContainer{
+    display: flex;
+    align-items: flex-start
+}
+
+.comentariosNomeContainer img{
+   margin-left: 30px;
+}
+
 .containerIng  {
     display: flex;
     flex-direction: column;
@@ -57,3 +98,59 @@ font-weight: 400;
 font-size: 20px;
 font-weight: 400;
 }
+.favorito{
+    margin-right: 99%;
+}
+.fav{
+    display: flex;
+    position: absolute;
+    opacity: 40%;
+    margin: 5px;
+}
+.fav:hover{
+    transition: 0.5s;
+    opacity: 100%;
+    transform: scale(1.05);
+}
+
+.fav img{
+    width:80px ;
+    margin: auto;
+}
+
+.rate {
+    font-family: fantasy;
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '🍽';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+

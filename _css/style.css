@@ -50,6 +50,28 @@ main{
 #imgHeader img{
     width: 100%;
 }
+#imgHeader{
+    position: relative;
+}
+
+.like{
+    position: absolute;
+    width: 10% !important;
+    opacity: 30%;
+    margin: 5px;
+}
+.like:hover{
+    position: absolute;
+    transition: 0.5s;
+    width: 10% !important;
+    transform: scale(1.05);
+    opacity: 100%;
+}
+
+.like img{
+    width: 100% !important;
+    margin: auto;
+}
 
 .buttons{
   background-color: rgb(255, 91, 0);
@@ -97,12 +119,12 @@ margin-left: 5px;
   outline: none;
 }
 
-
 #infos{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
+
 
 #choose{
     margin-top: 30px;
