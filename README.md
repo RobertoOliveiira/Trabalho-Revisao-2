@@ -1,4 +1,4 @@
-# Trabalho-Revisao-2
+# Receitas Spepette
 Trabalho de revisão JS consumindo API do curso C# Devs2Blu (Site de receitas)
 
 ![logo (1)](https://user-images.githubusercontent.com/35773596/202293460-df2b197c-6b0f-4c95-a91c-b90c1a74745e.png)
